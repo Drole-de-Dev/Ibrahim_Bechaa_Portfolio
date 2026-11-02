@@ -1,0 +1,1553 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf8>
+    <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+    </head>
+    <body>
+<title>Cours HTML</title>
+<meta name="viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<!--  If I see this in your project,
+pray the Fox God I never see you again -->
+<style>
+:root {
+  --bg: #F2F4F7;
+  --surface: #FFFFFF;
+  --ink: #101A26;
+  --muted: #556375;
+  --line: #D5DBE3;
+  --accent: #2B45F5;
+  --accent-ink: #FFFFFF;
+  --coin: #FFC83D;
+  --coin-ink: #3A2A00;
+  --good: #0E7A58;
+  --code-bg: #EAEEF4;
+  --c-tag: #B3263E;
+  --c-attr: #8A5200;
+  --c-str: #0E6B4D;
+  --c-com: #7A8798;
+  --c-sel: #5B32C9;
+  --c-prop: #1B58B8;
+  --c-num: #B34A00;
+  --pv-bg: #FFFFFF;
+  --pv-ink: #111111;
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C121B;
+    --surface: #141C28;
+    --ink: #E8EDF4;
+    --muted: #93A1B4;
+    --line: #243044;
+    --accent: #8A9BFF;
+    --accent-ink: #0C121B;
+    --good: #46D3A3;
+    --code-bg: #0A0F17;
+    --c-tag: #FF8DA1;
+    --c-attr: #FFC26B;
+    --c-str: #7BE0B8;
+    --c-com: #6E7D92;
+    --c-sel: #C0A8FF;
+    --c-prop: #7FB6FF;
+    --c-num: #FFA469;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C121B;
+  --surface: #141C28;
+  --ink: #E8EDF4;
+  --muted: #93A1B4;
+  --line: #243044;
+  --accent: #8A9BFF;
+  --accent-ink: #0C121B;
+  --good: #46D3A3;
+  --code-bg: #0A0F17;
+  --c-tag: #FF8DA1;
+  --c-attr: #FFC26B;
+  --c-str: #7BE0B8;
+  --c-com: #6E7D92;
+  --c-sel: #C0A8FF;
+  --c-prop: #7FB6FF;
+  --c-num: #FFA469;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-block: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; text-wrap: balance; margin: 0; }
+p { margin: 0; max-width: 68ch; }
+a { color: var(--accent); }
+code, kbd { font-family: var(--font-code); font-size: 0.88em; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+.shell { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 40px; }
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-block: 28px; max-height: 100vh; overflow-y: auto; }
+.rail-brand { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; margin-bottom: 4px; }
+.rail-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 18px; }
+.meter { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 6px; }
+.meter > i { display: block; height: 100%; width: 0; background: var(--coin); transition: width 0.4s ease; }
+.meter-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 18px; font-variant-numeric: tabular-nums; }
+.rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.rail a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); padding: 6px 10px; border-radius: 8px; font-size: 0.92rem; }
+.rail a:hover { background: var(--surface); }
+.rail a[aria-current="true"] { background: var(--surface); box-shadow: inset 3px 0 0 var(--accent); font-weight: 700; }
+.lv-tag { font-family: var(--font-code); font-size: 0.72rem; color: var(--muted); min-width: 2.2em; }
+.rail a.done .lv-tag { color: var(--good); }
+.rail a.done .lv-tag::after { content: " ✓"; }
+.theme-btn { margin-top: 18px; }
+
+main { padding-block: 28px 80px; display: flex; flex-direction: column; gap: 72px; min-width: 0; }
+.hero { display: flex; flex-direction: column; gap: 20px; padding-bottom: 8px; }
+.eyebrow { font-family: var(--font-code); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4.2rem); font-weight: 800; letter-spacing: -0.02em; }
+.hero h1 mark { background: var(--coin); color: var(--coin-ink); padding: 0 0.15em; border-radius: 4px; }
+.lede { font-size: 1.15rem; color: var(--muted); }
+
+.time-note { font-size: 0.88rem; color: var(--muted); max-width: 68ch; }
+.plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 6px; }
+.plan div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.plan b { display: block; font-family: var(--font-display); font-size: 1.05rem; }
+.plan span { font-family: var(--font-code); font-size: 0.78rem; color: var(--muted); }
+
+.level { display: flex; flex-direction: column; gap: 22px; scroll-margin-top: 24px; min-width: 0; }
+.level-head { display: flex; flex-direction: column; gap: 8px; }
+.level-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.015em; }
+.level-head .eyebrow b { color: var(--accent); font-weight: 700; }
+.level h3 { font-size: 1.2rem; font-weight: 800; margin-top: 6px; }
+.level > p, .level .prose p { color: var(--ink); }
+.prose { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.prose ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; max-width: 68ch; }
+.prose li::marker { color: var(--accent); }
+
+.callout { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; max-width: 72ch; }
+.callout .tag { font-family: var(--font-code); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
+.callout.tip .tag { color: var(--good); }
+.callout.warn { border-color: var(--coin); }
+.callout.warn .tag { color: var(--c-num); }
+.callout.req { border-color: var(--accent); }
+.callout.req .tag { color: var(--accent); }
+
+pre.code, .code-block { margin: 0; background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-family: var(--font-code); font-size: 0.86rem; line-height: 1.65; tab-size: 2; max-width: 100%; }
+pre.code .t { color: var(--c-tag); } pre.code .a { color: var(--c-attr); } pre.code .s { color: var(--c-str); }
+pre.code .c { color: var(--c-com); font-style: italic; } pre.code .k { color: var(--c-sel); } pre.code .p { color: var(--c-prop); } pre.code .n { color: var(--c-num); }
+.file-label { font-family: var(--font-code); font-size: 0.78rem; color: var(--muted); margin-bottom: -14px; }
+
+button, select, input[type="text"] { font: inherit; }
+.btn { background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 7px 14px; cursor: pointer; font-weight: 500; font-size: 0.9rem; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
+.btn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* Live editor */
+.pg { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.pg-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.pg-title { font-family: var(--font-display); font-weight: 800; }
+.pg-title small { font-family: var(--font-code); font-weight: 400; font-size: 0.74rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-right: 8px; }
+.pg-actions { display: flex; gap: 8px; }
+.pg-goal { padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--bg); font-size: 0.95rem; }
+.pg-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.pg-edit, .pg-view { min-width: 0; display: flex; flex-direction: column; }
+.pg-edit { border-right: 1px solid var(--line); }
+.tabs { display: flex; gap: 2px; padding: 8px 10px 0; border-bottom: 1px solid var(--line); background: var(--bg); }
+.tab { border: 1px solid transparent; border-bottom: none; background: transparent; color: var(--muted); padding: 6px 14px; border-radius: 8px 8px 0 0; cursor: pointer; font-family: var(--font-code); font-size: 0.8rem; }
+.tab[aria-selected="true"] { background: var(--code-bg); color: var(--ink); border-color: var(--line); margin-bottom: -1px; }
+.pg textarea { width: 100%; min-height: 280px; flex: 1; resize: vertical; border: 0; background: var(--code-bg); color: var(--ink); font-family: var(--font-code); font-size: 0.86rem; line-height: 1.6; padding: 12px 14px; tab-size: 2; white-space: pre; overflow: auto; }
+.pg textarea:focus-visible { outline-offset: -3px; }
+.chrome { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--bg); font-family: var(--font-code); font-size: 0.78rem; color: var(--muted); }
+.chrome i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); display: inline-block; }
+.chrome span { margin-left: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 1px 12px; }
+.pv { background: var(--pv-bg); color: var(--pv-ink); min-height: 280px; flex: 1; overflow: auto; position: relative; }
+.pv-host { display: block; min-height: 100%; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 0.88rem; }
+.checks label { display: flex; align-items: center; gap: 7px; color: var(--muted); }
+.checks .box { width: 16px; height: 16px; border-radius: 4px; border: 2px solid var(--line); display: inline-grid; place-items: center; font-size: 11px; line-height: 1; }
+.checks .ok { color: var(--ink); }
+.checks .ok .box { background: var(--good); border-color: var(--good); color: var(--bg); }
+.pg details { border-top: 1px solid var(--line); padding: 8px 14px; font-size: 0.9rem; }
+.pg summary { cursor: pointer; color: var(--muted); }
+.pg details pre { margin-top: 8px; }
+
+/* Interactive pieces */
+.lab { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lab-title { font-family: var(--font-display); font-weight: 800; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.anno-lines { display: flex; flex-direction: column; gap: 2px; }
+.anno-line { text-align: left; background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 3px 10px; cursor: pointer; font-family: var(--font-code); font-size: 0.86rem; color: var(--ink); white-space: pre; overflow-x: auto; }
+.anno-line:hover { background: var(--code-bg); }
+.anno-line[aria-pressed="true"] { background: var(--code-bg); border-color: var(--accent); }
+.anno-note { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; min-height: 140px; display: flex; flex-direction: column; gap: 6px; }
+.anno-note b { font-family: var(--font-display); font-size: 1.05rem; }
+.tree { font-family: var(--font-code); font-size: 0.86rem; line-height: 1.7; background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; overflow-x: auto; white-space: pre; }
+.tree .here { background: var(--coin); color: var(--coin-ink); border-radius: 3px; padding: 0 4px; }
+.opts { display: flex; flex-direction: column; gap: 8px; }
+.opt { text-align: left; font-family: var(--font-code); font-size: 0.86rem; border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 8px; padding: 8px 12px; cursor: pointer; overflow-x: auto; }
+.opt:hover { border-color: var(--accent); }
+.opt.right { background: var(--good); border-color: var(--good); color: var(--bg); }
+.opt.wrong { border-color: var(--c-tag); color: var(--c-tag); }
+.feedback { min-height: 1.6em; font-size: 0.92rem; color: var(--muted); }
+
+.bm-wrap { display: grid; place-items: center; padding: 18px; background: var(--bg); border-radius: 10px; border: 1px solid var(--line); overflow: auto; }
+.bm-margin { background: color-mix(in srgb, var(--coin) 35%, transparent); border: 1px dashed var(--c-num); }
+.bm-border { background: var(--ink); }
+.bm-padding { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+.bm-content { background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; font-family: var(--font-code); font-size: 0.78rem; width: 130px; height: 54px; }
+.sliders { display: grid; gap: 10px; }
+.slider { display: grid; grid-template-columns: 70px minmax(0, 1fr) 44px; gap: 10px; align-items: center; font-size: 0.9rem; }
+.slider input { width: 100%; accent-color: var(--accent); }
+.slider output { font-family: var(--font-code); font-size: 0.82rem; text-align: right; font-variant-numeric: tabular-nums; }
+
+.flexbox { display: flex; background: var(--bg); border: 1px dashed var(--line); border-radius: 10px; padding: 12px; min-height: 150px; }
+.flexbox { overflow: auto; }
+.flexbox i { flex: none; width: 56px; height: 48px; border-radius: 8px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-style: normal; font-family: var(--font-code); font-weight: 700; }
+.flexbox i:nth-child(2) { height: 72px; background: var(--coin); color: var(--coin-ink); }
+.flexbox i:nth-child(3) { height: 36px; background: var(--ink); color: var(--bg); }
+.ctl { display: flex; flex-wrap: wrap; gap: 14px 18px; }
+.ctl label { display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; color: var(--muted); font-family: var(--font-code); }
+.ctl select, .ctl input[type="color"] { background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+.ctl input[type="color"] { padding: 2px; height: 36px; width: 56px; }
+
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; counter-reset: s; }
+.flow .st { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.flow .st b { font-family: var(--font-display); }
+.flow .st::before { counter-increment: s; content: "Étape " counter(s); font-family: var(--font-code); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card b { font-family: var(--font-display); font-size: 1.05rem; }
+.card p { font-size: 0.93rem; color: var(--muted); }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-code); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.scroll-x { overflow-x: auto; max-width: 100%; }
+.final { display: flex; flex-direction: column; gap: 6px; max-width: 72ch; }
+.final label { display: flex; gap: 10px; align-items: flex-start; padding: 8px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; cursor: pointer; }
+.final input { margin-top: 5px; accent-color: var(--accent); width: 16px; height: 16px; }
+.site-foot { color: var(--muted); font-family: var(--font-code); font-size: 0.8rem; letter-spacing: 0.04em; text-align: center; }
+.foot { color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--line); padding-top: 18px; }
+
+.part-break { display: flex; flex-direction: column; gap: 8px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.part-break h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; }
+.part-break.self { border-style: dashed; }
+.part-break p { color: var(--muted); }
+.plan .later { border-style: dashed; background: transparent; }
+.rail-group { font-family: var(--font-code); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 14px 10px 4px; }
+.rail-group:first-child { padding-top: 0; }
+.home-tag { font-family: var(--font-code); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 99px; padding: 1px 9px; margin-left: 8px; color: var(--muted); font-weight: 400; vertical-align: middle; }
+@media (max-width: 900px) {
+  .rail-group { display: none; }
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { position: static; max-height: none; padding-block: 18px 6px; }
+  .rail ol { flex-direction: row; overflow-x: auto; gap: 6px; padding-bottom: 8px; }
+  .rail a { white-space: nowrap; border: 1px solid var(--line); }
+  .meter-label { margin-bottom: 12px; }
+  .theme-btn { margin-top: 6px; }
+  main { gap: 56px; }
+}
+@media (max-width: 760px) {
+  .pg-body, .split { grid-template-columns: minmax(0, 1fr); }
+  .pg-edit { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) { .meter > i { transition: none; } html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+</style>
+<div class="shell">
+<aside class="rail" aria-label="Plan du cours">
+  <div class="rail-brand">Portfolio</div>
+  <div class="rail-sub">HTML et CSS</div>
+  <div class="meter" role="progressbar" aria-label="Défis réussis" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="meter-fill"></i></div>
+  <div class="meter-label" id="meter-label">0 / 0 défis</div>
+  <ol id="rail-list"></ol>
+  <button class="btn theme-btn" id="theme-btn" type="button">Changer de thème</button>
+</aside>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Initiation web pour le projet portfolio</div>
+  <h1>Les bases du web <mark>en une heure</mark></h1>
+  <p class="lede">La première partie, le cours : apprendre le HTML et le CSS dont vous aurez besoin pour démarrer votre portfolio. La partie 2 ne sera pas traitée, mais tout est là pour continuer seul et poser vos questions. Chaque niveau se termine par un éditeur, écrivez dedans, cassez tout, réparez.</p>
+  <div class="plan" aria-label="Planning du cours">
+    <div><b>Mise en place</b><span>Niveau 0 - 5 min</span></div>
+    <div><b>HTML</b><span>Niveaux 1 à 4 - 35 min</span></div>
+    <div><b>Ajouter une page</b><span>Niveau 5 - 5 min</span></div>
+    <div><b>Premier CSS</b><span>Niveau 6 - 15 min</span></div>
+    <div class="later"><b>En autonomie</b><span>Niveaux 7 à 12 - hors cours</span></div>
+  </div>
+  <p class="time-note">Le cours dure environ 1 heure, sans compter la présentation du CDC. Les durées sont plus ou moins faites à la louche pour ce cours.  Les niveaux 7 à 12 (boîtes, mise en page, thème, mise en ligne, idées bonus, kit de survie) ne sont pas traités, mais font partie du cours : servez-vous-en, et posez vos questions quand vous bloquez.</p>
+</header>
+<div class="part-break class"><span class="eyebrow">Partie 1 - En classe - environ 1 h</span><h2>Les bases</h2></div>
+
+<!-- NIVEAU 0 -->
+<section class="level" id="l0" data-part="class" data-title="Mise en place">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 0</b> - 5 min</div>
+    <h2>Ce qu'est vraiment un site web</h2>
+  </div>
+  <div class="prose">
+    <p>Un site web est un dossier de fichiers. Votre navigateur ouvre un fichier, le lit de haut en bas, et dessine ce qu'il décrit. C'est tout.</p>
+    <p>Si vous avez déjà utilisé un moteur de jeu, l'idée vous sera familière. Le <strong>HTML</strong> est la hiérarchie de la scène : il liste les objets de la page (titre, paragraphe, image) et comment ils sont imbriqués. Le <strong>CSS</strong> règle les matériaux et la mise en page : couleurs, polices, tailles, positions. Le <strong>JavaScript</strong> est la couche de script. Vous pourrez l'ajouter plus tard, mais ce n'est pas nécessaire.</p>
+  </div>
+  <div class="cols">
+    <div class="card"><b>VS Code</b><p>Votre éditeur. Ouvrez le dossier de votre site avec <em>Fichier &gt; Ouvrir le dossier.</em></p></div>
+    <div class="card"><b>Live Server</b><p>Une extension de VS Code. Clic droit sur <code>index.html</code>, puis <em>Open with Live Server</em> : le navigateur se rafraîchit à chaque sauvegarde <em> (ctrl + s).</em></p></div>
+    <div class="card"><b>Un navigateur</b><p>Firefox, Brave, etc. Appuyez sur <kbd>F12</kbd> pour ouvrir les outils de développement. Vous les utiliserez plus tard.</p></div>
+  </div>
+  <h3>Le dossier que vous aurez à la fin</h3>
+  <p>Gardez-le plat. Chaque page est à côté du <code>style.css</code>, et les images vont dans un dossier <code>images</code>.</p>
+<pre class="tree">mon-portfolio/
+├── index.html              <span class="here">À propos (la page d'accueil)</span>
+├── modele-projet.html      (copier pour chaque projet)
+├── lighthouse-keeper-s-secret.html
+├── projet-space-jam.html
+├── style.css               (un seule css pour toutes les pages)
+├── images/
+│   ├── portrait.jpg
+│   └── lighthouse-cover.png
+└── cv.pdf</pre>
+  <div class="callout tip"><span class="tag">Nomenclature</span><p>Minuscules, pas d'espaces, pas d'accents, des tirets entre les mots : <code>lighthouse-keeper-s-secret.html</code>, jamais <code>Lighthouse Keeper's Secret.HTML</code>. Le navigateur vous pardonnera, GitHub Pages non.</p></div>
+</section>
+
+<!-- NIVEAU 1 -->
+<section class="level" id="l1" data-part="class" data-title="Le squelette">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 1</b> - 10 min</div>
+    <h2>Le squelette de toute page</h2>
+  </div>
+  <div class="prose">
+    <p>Toute page HTML commence par les mêmes quelques lignes. Ne les écrivez jamais de zéro : copiez-les. Mais vous devez savoir à quoi elles servent, car la plupart des « ma page est cassée » commencent ici.</p>
+  </div>
+  <div class="lab" data-anno="skeleton"></div>
+  <div class="prose">
+    <h3>Balises, attributs, imbrication</h3>
+    <ul>
+      <li>Une <strong>balise</strong> est un mot entre chevrons. La plupart vont par paire : <code>&lt;p&gt;</code> ouvre, <code>&lt;/p&gt;</code> ferme (remarquez le slash).</li>
+      <li>Tout ce qui est entre les deux est le <strong>contenu</strong>. L'ensemble forme un <strong>élément</strong>.</li>
+      <li>Un <strong>attribut</strong> ajoute une information à une balise ouvrante : <code>&lt;a href="page.html"&gt;</code>.</li>
+      <li>Les éléments s'imbriquent comme des dossiers. Fermez toujours les éléments de l'intérieur vers l'extérieur.</li>
+    </ul>
+  </div>
+  <pre class="code" data-lang="html">&lt;p class="intro"&gt;Hello &lt;strong&gt;World&lt;/strong&gt;&lt;/p&gt;
+&lt;!-- ↑ balise + attribut   ↑ élément imbriqué  ↑ balise fermante --&gt;</pre>
+  <div class="callout tip"><span class="tag">Commentaires</span><p>Tout ce qui est entre <code>&lt;!--</code> et <code>--&gt;</code> est ignoré par le navigateur. Utilisez-le pour des notes personnelles, ou pour désactiver un bloc le temps d'un test (ou /* */).</p></div>
+  <div class="pg" data-title="Votre première page" data-file="index.html"
+       data-goal="Mettez votre nom dans le titre, ajoutez un deuxième paragraphe, mettez un mot en gras et laissez-vous un commentaire."
+       data-checks='[{"l":"Deux paragraphes ou plus","sel":"p","min":2},{"l":"Un mot en gras","sel":"strong, b"},{"l":"Un commentaire","html":"<!--[\\s\\S]*-->"}]'>
+<script type="text/plain" data-src="html"><h1>Bonjour, je suis ...</h1>
+<p>J'étudie la programmation.</p>
+</script>
+<script type="text/plain" data-src="css">/* Laissez vide pour l'instant. */
+</script>
+  </div>
+</section>
+
+<!-- NIVEAU 2 -->
+<section class="level" id="l2" data-part="class" data-title="Texte et listes">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 2</b> - 8 min</div>
+    <h2>Texte, titres et listes</h2>
+  </div>
+  <div class="scroll-x">
+  <table>
+    <thead><tr><th>Balise</th><th>Ce que c'est</th><th>À utiliser pour</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;h1&gt;</code> à <code>&lt;h6&gt;</code></td><td>Titres, du plus au moins important</td><td>Un seul <code>h1</code> par page (son titre), puis des <code>h2</code> pour les sections</td></tr>
+      <tr><td><code>&lt;p&gt;</code></td><td>Paragraphe</td><td>Tout bloc de texte</td></tr>
+      <tr><td><code>&lt;strong&gt;</code> <code>&lt;em&gt;</code></td><td>Importance, emphase</td><td>Gras et italique</td></tr>
+      <tr><td><code>&lt;ul&gt;</code> <code>&lt;ol&gt;</code> <code>&lt;li&gt;</code></td><td>Liste à puces, liste numérotée, élément de liste</td><td>Compétences, outils utilisés, ce que vous avez fait sur un projet</td></tr>
+      <tr><td><code>&lt;br&gt;</code> <code>&lt;hr&gt;</code></td><td>Saut de ligne, ligne horizontale</td><td>Rarement. Ces deux-là n'ont pas de balise fermante.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout warn"><span class="tag">Piège des espaces</span><p>Le navigateur réduit n'importe quel nombre d'espaces et de retours à la ligne à un seul espace. Appuyer sur Entrée dans votre fichier ne crée pas un nouveau paragraphe sur la page. Utilisez un nouveau <code>&lt;p&gt;</code>.</p></div>
+  <div class="callout warn"><span class="tag">Un titre n'est pas une taille de police</span><p>Ne choisissez pas <code>h3</code> parce qu'il est plus petit. Choisissez le titre dont le <em>niveau</em> est le bon, et changez son apparence avec le CSS plus tard.</p></div>
+  <div class="pg" data-title="Présentez-vous" data-home="1" data-file="index.html"
+       data-goal="Continuez cette page À propos : ajoutez un deuxième paragraphe, mettez quelques mots en valeur, ajoutez un h2 « Compétences » et une liste d'au moins trois compétences."
+       data-checks='[{"l":"Un deuxième paragraphe","sel":"p","min":2},{"l":"Un peu d&apos;emphase","sel":"strong, em"},{"l":"Un h2","sel":"h2"},{"l":"Une liste de 3 éléments","sel":"ul li, ol li","min":3}]'>
+<script type="text/plain" data-src="html"><h1>Yaël Girard</h1>
+<p>Étudiant en 2e année de programmation.</p>
+</script>
+<script type="text/plain" data-src="css"></script>
+<script type="text/plain" data-src="solution"><h1>Yaël Girard</h1>
+<p>Étudiant en 2e année de programmation.</p>
+<p>J'aime la <em>création d'univers</em> et le level design</p>
+
+<h2>Compétences</h2>
+<ul>
+  <li>Unity / C#</li>
+  <li>Godot / C++</li>
+  <li>Level design</li>
+</ul></script>
+  </div>
+</section>
+
+<!-- NIVEAU 3 -->
+<section class="level" id="l3" data-part="class" data-title="Liens et images">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 3</b> - 10 min</div>
+    <h2>Liens, images et chemins</h2>
+  </div>
+  <div class="prose">
+    <p>Deux éléments relient votre page au reste du monde. Tous deux s'appuient sur un <strong>chemin</stron>, en partant du fichier dans lequel vous écrivez.</p>
+  </div>
+  <pre class="code" data-lang="html">&lt;!-- un lien vers une autre page de TON site --&gt;
+&lt;a href="lighthouse-keeper-s-secret.html"&gt;Lighthouse Keeper's Secret&lt;/a&gt;
+
+&lt;!-- un lien vers le site externe (adresse complète, commence par https) --&gt;
+&lt;a href="https://github.com/3Mcrystal" target="_blank"&gt;Ma page github&lt;/a&gt;
+
+&lt;!-- une image de votre dossier images, avec une description textuelle --&gt;
+&lt;img src="images/portrait.jpg" alt="Portrait de Yaël à son bureau"&gt;
+
+&lt;!-- un fichier à ouvrir ou télécharger --&gt;
+&lt;a href="cv.pdf"&gt;Mon CV (PDF)&lt;/a&gt;</pre>
+  <div class="cols">
+    <div class="card"><b>href</b><p>Où mène le lien. Vos propres pages : nom du fichier. Sites autre : l'adresse complète en <code>https://</code>.</p></div>
+    <div class="card"><b>target="_blank"</b><p>Ouvre le lien dans un nouvel onglet. Pratique pour les liens externes</p></div>
+    <div class="card"><b>alt</b><p>Décrit l'image pour les lecteurs d'écran, et s'affiche si l'image ne charge pas. Ne l'oubliez jamais.</p></div>
+  </div>
+  <h3>Casse-tête de chemins</h3>
+  <p>La page dans laquelle vous écrivez est surlignée.</p>
+  <div class="lab quiz" data-quiz="paths"></div>
+  <div class="callout tip"><span class="tag">Vous le croiserez</span><p><code>../</code> veut dire « remontez d'un dossier ». Vous n'en avez besoin que si vous mettez des pages dans des sous-dossiers. Notre structure à plat l'évite volontairement.</p></div>
+  <div class="pg" data-title="Des liens entre les pages" data-home="1" data-file="index.html"
+       data-goal="Ajoutez un lien vers lighthouse-keeper-s-secret.html, un lien externe qui s'ouvre dans un nouvel onglet, et une image avec un texte alt. L'aperçu ne peut pas charger les fichiers de votre ordinateur : une icône d'image cassée est normale ici."
+       data-checks='[{"l":"Un lien vers votre page projet","sel":"a[href$=\"lighthouse-keeper-s-secret.html\"]"},{"l":"Un lien externe","sel":"a[href^=\"https://\"]"},{"l":"S&apos;ouvre dans un nouvel onglet","sel":"a[target=\"_blank\"]"},{"l":"Une image avec un texte alt","sel":"img[alt]:not([alt=\"\"])"}]'>
+<script type="text/plain" data-src="html"><h1>Yaël Girard</h1>
+<p>Mes projets :</p>
+<ul>
+  <li><a href="">Lighthouse Keeper's Secret</a></li>
+</ul>
+</script>
+<script type="text/plain" data-src="css"></script>
+  </div>
+</section>
+<!-- NIVEAU 4 -->
+<section class="level" id="l4" data-part="class" data-title="Structure de page">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 4</b> - 7 min</div>
+    <h2>Organiser une page en zones</h2>
+  </div>
+  <div class="prose">
+    <p>Jusqu'ici, tout est empilé en vrac. Les vraies pages sont découpées en zones. Ces balises n'affichent rien par elles-mêmes. Elles donnent du sens à une zone, et donnent au CSS quelque chose à attraper plus tard.</p>
+  </div>
+  <div class="scroll-x">
+  <table>
+    <thead><tr><th>Balise</th><th>La zone</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;header&gt;</code></td><td>Le haut de la page : votre nom, un logo, la navigation</td></tr>
+      <tr><td><code>&lt;nav&gt;</code></td><td>Le menu : un groupe de liens vers vos pages</td></tr>
+      <tr><td><code>&lt;main&gt;</code></td><td>Le contenu propre à cette page. Un seul par page.</td></tr>
+      <tr><td><code>&lt;section&gt;</code></td><td>Un bloc thématique dans main (À propos, Compétences, Contact)</td></tr>
+      <tr><td><code>&lt;article&gt;</code></td><td>Un élément autonome, par exemple une carte de projet</td></tr>
+      <tr><td><code>&lt;footer&gt;</code></td><td>Le bas de la page : copyright, liens sociaux</td></tr>
+      <tr><td><code>&lt;div&gt;</code> <code>&lt;span&gt;</code></td><td>Des boîtes neutres, sans signification. <code>div</code> pour un bloc, <code>span</code> pour quelques mots dans un texte.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="prose">
+    <h3>Donner un nom : class et id</h3>
+    <p>Pour styliser un élément autrement que les autres, donnez-lui une <code>class</code> (réutilisable, plusieurs éléments peuvent la partager) ou un <code>id</code> (unique sur la page).</p>
+  </div>
+  <pre class="code" data-lang="html">&lt;article class="project-card"&gt;
+  &lt;h3&gt;Lighthouse Keeper's Secret&lt;/h3&gt;
+  &lt;p&gt;Un jeu de puzzle en point & click sous SFML.&lt;/p&gt;
+&lt;/article&gt;</pre>
+  <div class="callout req"><span class="tag">Exigence du projet 1 - Page À propos :</span><p> qui vous êtes, ce que vous étudiez, un lien vers votre CV, vos RS. C'est votre <code>index.html</code>. Construisez-la dans l'éditeur ci-dessous.</p></div>
+  <div class="pg" data-title="Construisez votre page À propos" data-file="index.html"
+       data-goal="Entourez le contenu avec header, nav, main et footer. Le nav doit contenir au moins deux liens. Mettez l'introduction dans une section."
+       data-checks='[{"l":"header","sel":"header"},{"l":"nav avec 2 liens","sel":"nav a","min":2},{"l":"main","sel":"main"},{"l":"une section","sel":"main section"},{"l":"footer","sel":"footer"}]'>
+<script type="text/plain" data-src="html"><h1>Yaël Girard</h1>
+<a href="index.html">À propos</a>
+<a href="lighthouse-keeper-s-secret.html">Lighthouse Keeper's Secret</a>
+
+<h2>À propos de moi</h2>
+<p>Étudiant en 2e année de programmation spécialité jeux vidéo. J'aime la création d'univers.</p>
+<p><a href="cv.pdf">Télécharger mon CV</a></p>
+
+<p>Retrouvez-moi sur <a href="https://itch.io">itch.io</a> et <a href="https://github.com/3Mcrystal">GitHub</a>.</p>
+</script>
+<script type="text/plain" data-src="css"></script>
+<script type="text/plain" data-src="solution"><header>
+  <h1>Yaël Girard</h1>
+  <nav>
+    <a href="index.html">À propos</a>
+    <a href="lighthouse-keeper-s-secret.html">Lighthouse Keeper's Secret</a>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h2>À propos de moi</h2>
+    <p>Étudiant en 2e année de programmation de jeux vidéo...</p>
+    <p><a href="cv.pdf">Télécharger mon CV</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>Retrouvez-moi sur <a href="https://itch.io">itch.io</a> et <a href="https://github.com/3Mcrystal">GitHub</a>.</p>
+</footer></script>
+  </div>
+</section>
+
+<!-- NIVEAU 5 -->
+<section class="level" id="l5" data-part="class" data-title="Ajouter une page">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 5</b> - 5 min</div>
+    <h2>Ajouter une page de projet</h2>
+  </div>
+  <div class="callout tip"><span class="tag">Démo en classe</span><p>En classe, ce niveau est une courte démo : copier le modèle une fois, le renommer, ajouter le lien. Faites l'exercice complet chez vous.</p></div>
+  <div class="callout req"><span class="tag">Exigence du projet 2 - Une page par projet</span><p>Les projets sont facultatifs. Ce qui compte, c'est qu'en ajouter un prenne cinq minutes. Vous le faites en copiant une page modèle. Pas d'outil, pas de commande.</p></div>
+  <div class="flow">
+    <div class="st"><b>Copiez le modèle</b><p>Dans VS Code, clic droit sur <code>modele-projet.html</code>, copier, coller. Renommez la copie : <code>lighthouse-keeper-s-secret.html</code>.</p></div>
+    <div class="st"><b>Remplissez-le</b><p>Changez le <code>title</code>, le titre, la ligne de détails, l'image et le texte. Gardez la structure.</p></div>
+    <div class="st"><b>Ajoutez le lien</b><p>Ajoutez un <code>&lt;a&gt;</code> vers la nouvelle page dans le menu de vos pages. Sans lui, personne ne trouvera la page.</p></div>
+    <div class="st"><b>Vérifiez et sauvegardez</b><p>Ouvrez-la avec Live Server. Cliquez sur tous les liens. Regardez le titre dans l'onglet du navigateur.</p></div>
+  </div>
+  <h3>La page modèle</h3>
+  <p>Voici la page entière, et le point de départ de chaque projet que vous ajoutez. Lisez-la de haut en bas : vous connaissez chacune de ses parties maintenant.</p>
+  <div class="file-label">modele-projet.html</div>
+<pre class="code" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Nom du projet | Votre nom&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;p class="site-name"&gt;Votre nom&lt;/p&gt;
+    &lt;nav&gt;
+      &lt;a href="index.html"&gt;À propos&lt;/a&gt;
+      &lt;a href="lighthouse-keeper-s-secret.html"&gt;Lighthouse Keeper's Secret&lt;/a&gt;
+      &lt;!-- ajoute un nouveau lien ici pour chaque nouveau projet --&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;h1&gt;Nom du projet&lt;/h1&gt;
+    &lt;p class="meta"&gt;Game jam - Godot - 48 heures - Équipe de 4 - Mon rôle : programmeur gameplay&lt;/p&gt;
+    &lt;img src="images/projet-cover.png" alt="Capture d'écran du menu principal"&gt;
+
+    &lt;h2&gt;À propos du projet&lt;/h2&gt;
+    &lt;p&gt;Deux ou trois phrases : qu'est-ce que c'est, quel était l'objectif ?&lt;/p&gt;
+
+    &lt;h2&gt;Ce que j'ai fait&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Une chose que j'ai construite&lt;/li&gt;
+      &lt;li&gt;Une autre chose que j'ai construite&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h2&gt;Liens&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="https://votrepseudo.itch.io/projet" target="_blank"&gt;Y jouer sur itch.io&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;© 2026 Votre nom&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <div class="prose">
+    <h3>Montrer votre jeu sans faire de version web</h3>
+    <ul>
+      <li><strong>itch.io :</strong> publiez le build là-bas, puis faites un lien vers lui. C'est l'option « jouable » la plus simple.</li>
+      <li><strong>Une vidéo :</strong> mettez-la sur YouTube, cliquez sur <em>Partager &gt; Intégrer</em>, et collez le code <code>&lt;iframe&gt;</code> dans votre page. Vérifiez qu'elle fonctionne une fois votre site en ligne.</li>
+      <li><strong>Des captures :</strong> trois bonnes images valent mieux qu'un long texte. Ajoutez toujours <code>alt</code>.</li>
+      <li><strong>Votre rôle :</strong> dans un projet d'équipe, dites précisément ce que <em>vous</em> avez fait. C'est la première chose qu'un recruteur cherche.</li>
+    </ul>
+  </div>
+  <div class="pg" data-title="Remplissez la page projet" data-home="1" data-file="lighthouse-keeper-s-secret.html"
+       data-goal="Transformez ce squelette en page projet à vous : ligne de détails, au moins deux choses que vous avez faites, et un lien vers l'endroit où on peut jouer au jeu."
+       data-checks='[{"l":"2 choses faites ou plus","sel":"main ul li","min":2},{"l":"Un lien externe","sel":"a[href^=\"https://\"]"},{"l":"Une image avec alt","sel":"img[alt]:not([alt=\"\"])"}]'>
+<script type="text/plain" data-src="html"><header>
+  <p>Yaël Girard</p>
+  <nav>
+    <a href="index.html">À propos</a>
+    <a href="lighthouse-keeper-s-secret.html">Lighthouse Keeper's Secret</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Nom du projet</h1>
+  <p>Game jam - Godot - 48 heures</p>
+  <img src="images/projet-cover.png" alt="">
+
+  <h2>À propos du projet</h2>
+  <p>Deux ou trois phrases.</p>
+
+  <h2>Ce que j'ai fait</h2>
+  <ul>
+    <li></li>
+  </ul>
+
+  <h2>Liens</h2>
+</main>
+</script>
+<script type="text/plain" data-src="css"></script>
+  </div>
+  <div class="callout tip"><span class="tag">Plus tard, si vous voulez</span><p>Copier le modèle à la main suffit pour 3 ou 4 projets. Si vous en avez beaucoup, un petit script peut générer les pages à partir d'une liste. C'est l'une des idées bonus du niveau 11.</p></div>
+</section>
+
+<!-- NIVEAU 6 -->
+<section class="level" id="l6" data-part="class" data-title="Premier CSS">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 6</b> - 15 min</div>
+    <h2>CSS : lui donner votre style</h2>
+  </div>
+  <div class="prose">
+    <p>Le CSS est une liste de <strong>règles</strong>. Chaque règle choisit des éléments et dit comment ils doivent apparaître.</p>
+  </div>
+  <pre class="code" data-lang="css">h1 {                      /* sélecteur : quels éléments ? */
+  color: #2b45f5;         /* propriété : valeur; */
+  font-size: 2.5rem;
+}</pre>
+  <div class="prose">
+    <h3>Relier une feuille de style</h3>
+    <p>Mettez vos règles dans un seul fichier, <code>style.css</code>, et reliez-le depuis le <code>&lt;head&gt;</code> de chaque page. Cette seule ligne fait que toutes vos pages partagent le même style.</p>
+  </div>
+  <pre class="code" data-lang="html">&lt;link rel="stylesheet" href="style.css"&gt;</pre>
+  <div class="callout warn"><span class="tag">Rien ne change ?</span><p>Vérifiez le nom du fichier et le chemin dans <code>href</code>, sauvegardez les deux fichiers, puis forcez le rafraîchissement avec <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>R</kbd>. C'est la cause neuf fois sur dix.</p></div>
+  <h3>Les sélecteurs dont vous avez besoin</h3>
+  <div class="scroll-x">
+  <table>
+    <thead><tr><th>Sélecteur</th><th>Choisit</th></tr></thead>
+    <tbody>
+      <tr><td><code>p</code></td><td>Tous les paragraphes</td></tr>
+      <tr><td><code>.project-card</code></td><td>Tout ce qui a <code>class="project-card"</code></td></tr>
+      <tr><td><code>#contact</code></td><td>L'unique élément avec <code>id="contact"</code></td></tr>
+      <tr><td><code>nav a</code></td><td>Les liens situés dans un nav</td></tr>
+      <tr><td><code>h1, h2</code></td><td>Les deux titres (une virgule veut dire « et »)</td></tr>
+      <tr><td><code>a:hover</code></td><td>Un lien pendant que la souris est dessus</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="prose">
+    <p>Quand deux règles se contredisent, le sélecteur le plus précis gagne, et à précision égale, celle qui est plus bas dans le fichier gagne. C'est pour cela que « cascade » est dans le nom.</p>
+    <h3>Les valeurs que vous utiliserez tout le temps</h3>
+    <ul>
+      <li><strong>Couleurs :</strong> des noms (<code>tomato</code>), des codes hexadécimaux (<code>#2b45f5</code>), ou <code>rgb(43 69 245)</code>. Utilisez un sélecteur de couleur : VS Code en affiche un quand vous survolez une couleur.</li>
+      <li><strong>Tailles :</strong> <code>px</code> est fixe. <code>rem</code> suit la taille de police de base, un bon choix par défaut pour le texte. <code>%</code> est relatif au parent.</li>
+      <li><strong>Polices :</strong> <code>font-family: Georgia, serif;</code> liste des solutions de repli dans l'ordre. Pour une police web gratuite, choisissez-en une sur fonts.google.com et collez le <code>&lt;link&gt;</code> fourni dans votre <code>&lt;head&gt;</code>.</li>
+    </ul>
+  </div>
+  <div class="pg" data-title="Restylez cette page" data-file="style.css" data-tab="css"
+       data-goal="Donnez à la page une couleur de fond, une couleur de texte, une autre police pour les titres, et stylez les liens."
+       data-checks='[{"l":"Une couleur de fond","css":"background(-color)?\\s*:"},{"l":"Une couleur de texte","css":"[^-]color\\s*:"},{"l":"Une police de titres","css":"font-family\\s*:"},{"l":"Un style de lien","css":"a(:hover)?\\s*\\{"}]'>
+<script type="text/plain" data-src="html"><header>
+  <p class="site-name">Yaël Girard</p>
+  <nav>
+    <a href="index.html">À propos</a>
+    <a href="lighthouse-keeper-s-secret.html">Lighthouse Keeper's Secret</a>
+  </nav>
+</header>
+<main>
+  <h1>Programmeur de jeux en formation</h1>
+  <p>J'aime la création d'univers, repousser les limites.</p>
+  <h2>Compétences</h2>
+  <ul><li>Unity</li><li>Godot</li><li>Level design</li></ul>
+</main>
+</script>
+<script type="text/plain" data-src="css">h1 {
+  font-size: 2.2rem;
+}
+</script>
+<script type="text/plain" data-src="solution">body {
+  background-color: #14202b;
+  color: #f2f4f7;
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  font-family: Georgia, serif;
+}
+
+a {
+  color: #ffc83d;
+}
+a:hover {
+  color: white;
+}</script>
+  </div>
+</section>
+
+<div class="part-break self"><span class="eyebrow">Partie 2 - En autonomie - hors cours</span><h2>Pour aller plus loin</h2><p>Ces niveaux ne sont pas couvert par le cours. Ils sont là pour servir d'aide lorsque vous construirez votre portfolio : boîtes et espacements, mise en page, thème, mise en ligne, fonctionnalitées bonus et kit de survie. Lisez-les à votre rythme et posez vos questions quand vous bloquez.</p></div>
+
+<!-- NIVEAU 7 -->
+<section class="level" id="l7" data-part="self" data-title="Les boîtes">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 7</b> - en autonomie</div>
+    <h2>Tout est une boîte</h2>
+  </div>
+  <div class="prose">
+    <p>Le navigateur traite chaque élément comme un rectangle à quatre couches, de l'intérieur vers l'extérieur : le <strong>contenu</strong>, le <strong>padding</strong> (espace à l'intérieur de la bordure), la <strong>bordure</strong>, et la <strong>marge</strong> (espace à l'extérieur, qui repousse les voisins). La plupart des « pourquoi y a-t-il un espace ici ? » trouvent leur réponse dans cette image. Bougez les curseurs.</p>
+  </div>
+  <div class="lab">
+    <div class="lab-title">Labo du modèle de boîte</div>
+    <div class="split">
+      <div class="bm-wrap" aria-hidden="true">
+        <div class="bm-margin" id="bm-margin"><div class="bm-border" id="bm-border"><div class="bm-padding" id="bm-padding"><div class="bm-content">contenu</div></div></div></div>
+      </div>
+      <div class="sliders">
+        <div class="slider"><label for="bm-m">margin</label><input id="bm-m" type="range" min="0" max="40" value="20"><output id="bm-m-o">20px</output></div>
+        <div class="slider"><label for="bm-b">border</label><input id="bm-b" type="range" min="0" max="16" value="4"><output id="bm-b-o">4px</output></div>
+        <div class="slider"><label for="bm-p">padding</label><input id="bm-p" type="range" min="0" max="40" value="16"><output id="bm-p-o">16px</output></div>
+        <pre class="code" id="bm-css" data-lang="css"></pre>
+      </div>
+    </div>
+  </div>
+  <div class="prose">
+    <ul>
+      <li><code>margin: 0 auto;</code> sur un bloc avec une <code>max-width</code> le centre horizontalement. C'est ainsi que vous gardez un texte lisible sur un grand écran.</li>
+      <li><code>border-radius</code> arrondit les coins. <code>50%</code> sur un carré donne un cercle.</li>
+      <li>Ajoutez <code>* { box-sizing: border-box; }</code> en haut de votre CSS pour que la largeur inclue le padding et la bordure. Tout le monde le fait.</li>
+    </ul>
+  </div>
+  <div class="pg" data-title="Stylez une carte de projet" data-file="style.css" data-tab="css"
+       data-goal="Transformez le texte brut en carte : ajoutez un padding, une bordure, des coins arrondis, une marge en dessous et une max-width."
+       data-checks='[{"l":"padding","css":"padding\\s*:"},{"l":"border","css":"border\\s*:"},{"l":"border-radius","css":"border-radius\\s*:"},{"l":"margin","css":"margin(-bottom)?\\s*:"},{"l":"max-width","css":"max-width\\s*:"}]'>
+<script type="text/plain" data-src="html"><article class="project-card">
+  <h3>Lighthouse Keeper's Secret</h3>
+  <p>Un jeu de puzzle en point & click réalisé en 2 semaines avec SFML</p>
+</article>
+<article class="project-card">
+  <h3>Space Jam</h3>
+  <p>Shoot'em up d'arcade fait sous Unity pour une jam de l'école.</p>
+</article>
+</script>
+<script type="text/plain" data-src="css">* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #eef1f6;
+}
+
+.project-card {
+  background: white;
+}
+</script>
+<script type="text/plain" data-src="solution">.project-card {
+  background: white;
+  padding: 16px;
+  border: 2px solid #2b45f5;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  max-width: 420px;
+}</script>
+  </div>
+</section>
+<!-- NIVEAU 8 -->
+<section class="level" id="l8" data-part="self" data-title="Mise en page">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 8</b> - en autonomie</div>
+    <h2>Mettre en page avec flexbox</h2>
+  </div>
+  <div class="prose">
+    <p>Par défaut, les éléments de type bloc s'empilent verticalement. Mettez <code>display: flex;</code> sur un <em>parent</em> et ses enfants s'alignent en ligne, avec quelques propriétés pour les espacer. C'est ainsi que sont construits les menus, les rangées de cartes et les pieds de page. Jouez avec les contrôles et lisez le CSS produit.</p>
+  </div>
+  <div class="lab">
+    <div class="lab-title">Labo flexbox</div>
+    <div class="ctl">
+      <label for="fx-dir">flex-direction<select id="fx-dir"><option>row</option><option>column</option></select></label>
+      <label for="fx-just">justify-content<select id="fx-just"><option>flex-start</option><option>center</option><option>flex-end</option><option>space-between</option><option>space-around</option></select></label>
+      <label for="fx-align">align-items<select id="fx-align"><option>stretch</option><option>flex-start</option><option>center</option><option>flex-end</option></select></label>
+      <label for="fx-gap">gap<select id="fx-gap"><option>0px</option><option selected>12px</option><option>24px</option></select></label>
+      <label for="fx-wrap">flex-wrap<select id="fx-wrap"><option>nowrap</option><option>wrap</option></select></label>
+    </div>
+    <div class="split">
+      <div class="flexbox" id="fx-box"><i>1</i><i>2</i><i>3</i></div>
+      <pre class="code" id="fx-css" data-lang="css"></pre>
+    </div>
+  </div>
+  <div class="prose">
+    <ul>
+      <li><code>justify-content</code> répartit les éléments dans le sens principal (la ligne, par défaut). <code>align-items</code> agit dans le sens perpendiculaire.</li>
+      <li><code>gap</code> met un espace régulier entre les éléments, donc pas besoin de marges sur chacun.</li>
+      <li>Vous voulez une grille de cartes qui s'adapte seule à la largeur de l'écran ? Une règle suffit : <code>display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;</code></li>
+    </ul>
+    <h3>Les téléphones</h3>
+    <p>Beaucoup de visiteurs ouvriront votre portfolio sur un téléphone. Deux choses le permettent : la balise meta <code>viewport</code> du niveau 1, et une <strong>media query</strong>, une règle qui ne s'applique que si l'écran est étroit. Dans les éditeurs de cette page, les media queries suivent la largeur de la fenêtre de votre navigateur, pas celle de la petite zone d'aperçu.</p>
+  </div>
+  <pre class="code" data-lang="css">@media (max-width: 600px) {
+  nav { flex-direction: column; }   /* empile le menu sur les petits écrans */
+}</pre>
+  <div class="pg" data-title="Menu et grille de projets" data-file="style.css" data-tab="css"
+       data-goal="Faites du menu une ligne horizontale avec de l'espace entre les liens, et disposez les cartes dans une grille flexible."
+       data-checks='[{"l":"display flex ou grid","css":"display\\s*:\\s*(flex|grid)"},{"l":"gap","css":"gap\\s*:"},{"l":"justify-content ou colonnes de grille","css":"(justify-content|grid-template-columns)\\s*:"},{"l":"Bonus : une media query","css":"@media","bonus":true}]'>
+<script type="text/plain" data-src="html"><header>
+  <p class="site-name">Yaël Girard</p>
+  <nav>
+    <a href="index.html">À propos</a>
+    <a href="#">Lighthouse Keeper's Secret</a>
+    <a href="#">Space Jam</a>
+  </nav>
+</header>
+<main>
+  <h1>Projets</h1>
+  <div class="projects">
+    <article class="project-card"><h3>Lighthouse Keeper's Secret</h3><p>Un point & click sous SFML.</p></article>
+    <article class="project-card"><h3>Space Jam</h3><p>Shoot'em up d'arcade sous Unity.</p></article>
+    <article class="project-card"><h3>Dungeon Notes</h3><p>Pièce de portfolio de level design.</p></article>
+  </div>
+</main>
+</script>
+<script type="text/plain" data-src="css">* { box-sizing: border-box; }
+body { font-family: Arial, sans-serif; margin: 0; padding: 16px; }
+nav a { margin-right: 14px; }
+.project-card { border: 2px solid #2b45f5; border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+</script>
+<script type="text/plain" data-src="solution">nav {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-start;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}</script>
+  </div>
+</section>
+
+<!-- NIVEAU 9 -->
+<section class="level" id="l9" data-part="self" data-title="Votre style">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 9</b> - en autonomie</div>
+    <h2>Un style qui vous ressemble</h2>
+  </div>
+  <div class="callout req"><span class="tag">Exigence du projet 3 - Votre propre style</span><p>Simple, c'est très bien. Ce qui compte, c'est que vos pages soient cohérentes entre elles et que le rendu soit un choix de votre part, pas celui par défaut du navigateur.</p></div>
+  <div class="prose">
+    <p>Voici l'astuce qui rend un changement de style facile : écrivez vos couleurs et vos polices <strong>une seule fois</strong>, en haut de <code>style.css</code>, sous forme de <strong>variables</strong>, puis utilisez-les partout. Changez une ligne, tout le site change. Essayez sur un mini-site.</p>
+  </div>
+  <div class="lab">
+    <div class="lab-title">Labo de thème</div>
+    <div class="ctl">
+      <label for="th-bg">--bg<input id="th-bg" type="color" value="#14202b"></label>
+      <label for="th-text">--text<input id="th-text" type="color" value="#f2f4f7"></label>
+      <label for="th-accent">--accent<input id="th-accent" type="color" value="#ffc83d"></label>
+      <label for="th-font">--font-title<select id="th-font">
+        <option value="Georgia, serif">Georgia (classique)</option>
+        <option value="'Trebuchet MS', sans-serif">Trebuchet (amicale)</option>
+        <option value="'Courier New', monospace">Courier (terminal rétro)</option>
+        <option value="Impact, 'Arial Narrow', sans-serif">Impact (affiche)</option>
+        <option value="Verdana, sans-serif">Verdana (large)</option>
+      </select></label>
+      <label for="th-radius">--radius<select id="th-radius"><option>0px</option><option selected>8px</option><option>20px</option></select></label>
+    </div>
+    <div class="split">
+      <div class="theme-demo" id="th-demo" style="border-radius:10px;overflow:hidden;border:1px solid var(--line)">
+        <div id="th-site" style="padding:18px;display:flex;flex-direction:column;gap:12px;min-height:230px">
+          <div style="display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap"><b id="th-name">Yaël Girard</b><span id="th-links">À propos - Lighthouse Keeper's Secret</span></div>
+          <h4 id="th-h" style="margin:4px 0 0;font-size:1.6rem">Programmeur de jeux en formation</h4>
+          <p style="margin:0;max-width:none">Déplacements précis, level design, jams de 48 heures.</p>
+          <div id="th-card" style="padding:12px 14px;border:2px solid;display:flex;flex-direction:column;gap:2px"><b>Lighthouse Keeper's Secret</b><span>Jeu de plateforme où la lumière est la barre de vie.</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+        <pre class="code" id="th-css" data-lang="css"></pre>
+        <div><button class="btn primary" id="th-copy" type="button">Copier ce CSS</button> <span class="feedback" id="th-fb"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="prose">
+    <h3>Choisir un look en cinq minutes</h3>
+    <ul>
+      <li><strong>Deux ou trois couleurs :</strong> un fond, une couleur de texte, un accent pour les liens et les boutons. N'ajoutez rien d'autre tant que ça ne fonctionne pas.</li>
+      <li><strong>Contraste :</strong> si vous plissez les yeux et ne pouvez pas lire, personne ne le peut. Évitez le gris clair sur blanc.</li>
+      <li><strong>Deux polices au maximum :</strong> une pour les titres, une pour le texte. Parcourez fonts.google.com, ou restez sur les polices système ci-dessus.</li>
+      <li><strong>Volez l'ambiance, pas la mise en page :</strong> un jeu que vous aimez, une affiche, la palette de votre propre jeu. Votre portfolio peut ressembler à vos jeux.</li>
+      <li><strong>Soyez cohérent :</strong> même menu, mêmes couleurs, mêmes espacements sur chaque page.</li>
+    </ul>
+  </div>
+  <div class="pg" data-title="Rangez vos couleurs dans des variables" data-file="style.css" data-tab="css"
+       data-goal="Les couleurs sont répétées partout. Créez un bloc :root qui définit --bg, --text et --accent, puis remplacez les couleurs répétées par var(--bg), var(--text) et var(--accent). Ensuite changez une variable et regardez tout suivre."
+       data-checks='[{"l":"Un bloc :root avec des variables","css":":root\\s*\\{[^}]*--[a-z-]+\\s*:"},{"l":"Utilisation de var(...) au moins deux fois","css":"var\\(--[\\s\\S]*var\\(--"}]'>
+<script type="text/plain" data-src="html"><header><p class="site-name">Yaël Girard</p></header>
+<main>
+  <h1>Programmeur de jeux en formation</h1>
+  <p>Je fais de petits jeux et je les termine à temps. <a href="#">Voir mon travail</a>.</p>
+  <button>Me contacter</button>
+</main>
+</script>
+<script type="text/plain" data-src="css">body {
+  background: #14202b;
+  color: #f2f4f7;
+  font-family: Arial, sans-serif;
+  padding: 16px;
+}
+h1 { color: #ffc83d; }
+a { color: #ffc83d; }
+button {
+  background: #ffc83d;
+  color: #14202b;
+  border: 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+</script>
+<script type="text/plain" data-src="solution">:root {
+  --bg: #14202b;
+  --text: #f2f4f7;
+  --accent: #ffc83d;
+}
+body { background: var(--bg); color: var(--text); }
+h1, a { color: var(--accent); }
+button { background: var(--accent); color: var(--bg); }</script>
+  </div>
+</section>
+<!-- NIVEAU 10 -->
+<section class="level" id="l10" data-part="self" data-title="Mise en ligne">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 10</b> - en autonomie</div>
+    <h2>Mettre votre site en ligne avec GitHub Pages</h2>
+  </div>
+  <div class="callout warn"><span class="tag">Pas enseigné en classe</span><p>Vous suivrez ce niveau seul. C'est une exigence du projet, ne le laissez pas pour la dernière minute : essayez tôt, et demandez de l'aide si une étape ne correspond pas à ce que vous voyez.</p></div>
+  <div class="callout req"><span class="tag">Exigence du projet 4 - En ligne</span><p>Votre site doit être accessible à une adresse publique. GitHub Pages l'héberge gratuitement, directement depuis un dépôt. Un dépôt (<em>repository</em>) est un dossier de votre projet stocké sur GitHub.</p></div>
+  <div class="callout tip"><span class="tag">GitHub est en anglais</span><p>Les boutons et menus sont affichés en anglais. Les termes importants sont donnés ci-dessous en italique avec leur sens.</p></div>
+  <div class="flow">
+    <div class="st"><b>Créez votre dépôt depuis le modèle</b><p>Ouvrez le dépôt modèle que votre enseignant vous donne. Cliquez sur le bouton vert <em>Use this template</em> (utiliser ce modèle), puis <em>Create a new repository</em> (créer un dépôt).</p></div>
+    <div class="st"><b>Nommez-le</b><p>Appelez-le <code>votrepseudo.github.io</code> pour obtenir l'adresse courte <code>https://votrepseudo.github.io</code>. Un autre nom fonctionne aussi, l'adresse se termine alors par <code>/nom/</code>. Laissez-le <em>Public</em>.</p></div>
+    <div class="st"><b>Ajoutez votre contenu</b><p>Cliquez sur un fichier puis sur le crayon pour le modifier en ligne. Ou <em>Add file &gt; Upload files</em> (ajouter des fichiers) pour déposer images et pages. Terminez par <em>Commit changes</em>, qui enregistre le tout.</p></div>
+    <div class="st"><b>Activez Pages</b><p><em>Settings &gt; Pages</em> (paramètres). Sous <em>Source</em>, choisissez <em>Deploy from a branch</em> (déployer depuis une branche), branche <code>main</code>, dossier <code>/ (root)</code>, puis <em>Save</em>.</p></div>
+    <div class="st"><b>Attendez, puis visitez</b><p>Après une ou deux minutes, l'adresse apparaît en haut de l'écran Pages. L'onglet <em>Actions</em> montre la construction en cours.</p></div>
+    <div class="st"><b>Mettez à jour quand vous voulez</b><p>Chaque commit sur <code>main</code> republie le site tout seul. Aucune étape en plus.</p></div>
+  </div>
+  <div class="callout warn"><span class="tag">C'est public</span><p>N'importe qui peut lire votre site et votre CV.</p></div>
+  <div class="prose">
+    <h3>Si vous préférez travailler sur votre ordinateur</h3>
+    <p>Modifiez dans VS Code, puis envoyez les changements avec GitHub Desktop (un bouton nommé <em>Push origin</em>), ou avec trois commandes dans le terminal :</p>
+  </div>
+<pre class="code" data-lang="sh">git add .
+git commit -m "Ajout de la page Lighthouse Keeper's Secret"
+git push</pre>
+  <h3>Quand ça ne marche pas</h3>
+  <div class="scroll-x">
+  <table>
+    <thead><tr><th>Ce que vous voyez</th><th>Cause probable</th></tr></thead>
+    <tbody>
+      <tr><td>Une page « 404 » à votre adresse</td><td>La page d'accueil doit s'appeler exactement <code>index.html</code> et se trouver à la racine du dépôt. Ou Pages n'est pas encore activé.</td></tr>
+      <tr><td>Ça marche sur votre PC, l'image manque en ligne</td><td>En ligne, les noms respectent la casse : <code>Portrait.JPG</code> n'est pas <code>portrait.jpg</code>. Vérifiez aussi les espaces et les accents dans le nom.</td></tr>
+      <tr><td>La page s'affiche, mais sans style</td><td>Le <code>href</code> de la balise <code>link</code> ne correspond pas au vrai nom du fichier, ou <code>style.css</code> n'a pas été envoyé.</td></tr>
+      <tr><td>Les liens marchent en local, plus en ligne</td><td>Un chemin qui commence par <code>/</code> ou <code>C:\</code>. Utilisez des chemins relatifs comme <code>images/cover.png</code>.</td></tr>
+      <tr><td>Vous avez changé quelque chose, le site est identique</td><td>Attendez une minute, puis forcez le rafraîchissement avec <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>R</kbd>. Regardez l'onglet Actions : une croix rouge signale une erreur.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- NIVEAU 11 -->
+<section class="level" id="l11" data-part="self" data-title="Idées bonus">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 11</b> - facultatif</div>
+    <h2>Bonus : aller plus loin</h2>
+  </div>
+  <div class="prose"><p>Rien de tout cela n'est obligatoire. Choisissez ce qui vous tente, et demandez de l'aide si besoin.</p></div>
+  <div class="cols">
+    <div class="card"><b>Mode sombre, <strong>sans JavaScript<strong></b><p>Utilisez les variables du niveau 9 et redéfinissez-les quand le système du visiteur est en mode sombre. Facile.</p></div>
+    <div class="card"><b>Adapter aux téléphones</b><p>Les media queries et la grille flexible du niveau 8. Testez avec le mode appareil du navigateur (F12 -> icône de téléphone). Facile.</p></div>
+    <div class="card"><b>Une favicon</b><p>La petite icône de l'onglet. Ajoutez <code>&lt;link rel="icon" href="images/favicon.png"&gt;</code> dans chaque head. Facile.</p></div>
+    <div class="card"><b>Des aperçus de lien soignés</b><p>Ajoutez les balises meta <code>og:title</code>, <code>og:description</code> et <code>og:image</code> pour que votre lien soit joli quand il est partagé sur Discord ou LinkedIn. Facile.</p></div>
+    <div class="card"><b>Effets au survol et animations</b><p><code>transition</code> et <code>transform</code> en CSS. Une carte qui se soulève au survol, ce sont deux lignes. Moyen.</p></div>
+    <div class="card"><b>Interactions en JavaScript</b><p>Un bouton de thème, un filtre de projets, un carousel d'image de projet. Moyen.</p></div>
+    <div class="card"><b>Générer les pages de projet automatiquement</b><p>Gardez vos projets dans une liste et laissez un court script construire les cartes ou les pages. Difficile, mais très satisfaisant.</p></div>
+    <div class="card"><b>Votre propre nom de domaine</b><p>GitHub Pages accepte les domaines personnalisés. Cela coûte quelques euros par an. Moyen.</p></div>
+  </div>
+  <h3>Départ : mode sombre en CSS seulement</h3>
+  <pre class="code" data-lang="css">:root {
+  --bg: #ffffff;
+  --text: #14202b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14202b;
+    --text: #f2f4f7;
+  }
+}
+body { background: var(--bg); color: var(--text); }</pre>
+  <h3>Départ : un bouton de thème (JavaScript)</h3>
+  <pre class="code" data-lang="html">&lt;button id="toggle"&gt;Changer de thème&lt;/button&gt;
+&lt;script&gt;
+  document.getElementById("toggle").addEventListener("click", function () {
+    document.body.classList.toggle("dark");
+  });
+&lt;/script&gt;
+&lt;!-- puis dans le CSS : body.dark { background: #14202b; color: white; } --&gt;</pre>
+</section>
+
+<!-- NIVEAU 12 -->
+<section class="level" id="l12" data-part="self" data-title="Kit de survie">
+  <div class="level-head">
+    <div class="eyebrow"><b>Niveau 12</b> - à garder ouvert</div>
+    <h2>Kit de survie</h2>
+  </div>
+  <div class="prose">
+    <h3>Votre meilleur outil de débogage : F12</h3>
+    <ul>
+      <li><strong>Onglet Éléments :</strong> cliquez sur l'icône flèche, puis sur n'importe quoi dans votre page. Vous voyez son HTML, et chaque règle CSS qui s'applique, avec les règles barrées qui ont perdu. Vous pouvez modifier les valeurs en direct. Rien n'est sauvegardé : recopiez ce qui marche dans votre fichier.</li>
+      <li><strong>Onglet Console :</strong> les messages rouges signalent des problèmes.</li>
+      <li><strong>Onglet Réseau :</strong> rafraîchissez la page. Une ligne rouge avec <code>404</code> est un fichier que le navigateur n'a pas trouvé : mauvais chemin ou mauvais nom.</li>
+    </ul>
+  </div>
+  <h3>Symptôme, puis suspect</h3>
+  <div class="scroll-x">
+  <table>
+    <thead><tr><th>Symptôme</th><th>À vérifier</th></tr></thead>
+    <tbody>
+      <tr><td>Tout, à partir d'un certain point, est bizarre</td><td>Une balise non fermée au-dessus, ou un guillemet manquant dans un attribut</td></tr>
+      <tr><td>Le CSS n'a aucun effet</td><td>Le <code>link</code> dans le head, le nom du fichier, un <code>;</code> ou un <code>}</code> manquant, une faute dans le sélecteur, un fichier non sauvegardé</td></tr>
+      <tr><td>Une règle est ignorée</td><td>Une autre règle, plus précise, gagne. Inspectez l'élément avec F12 et cherchez la ligne barrée</td></tr>
+      <tr><td>Un caractère étrange comme Ã© apparaît</td><td>La ligne <code>meta charset="UTF-8"</code> est absente</td></tr>
+      <tr><td>La page est minuscule sur un téléphone</td><td>La balise meta <code>viewport</code> est absente</td></tr>
+      <tr><td>"C'est la faute du navigateur"</td><td>Vous vous appellez navigateur ?</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Un vérificateur gratuit, validator.w3.org, lit votre HTML et liste les erreurs par numéro de ligne.</p>
+  <h3>Aide-mémoire CSS</h3>
+  <div class="scroll-x">
+  <table>
+    <thead><tr><th>Propriété</th><th>Exemple</th><th>Effet</th></tr></thead>
+    <tbody>
+      <tr><td><code>color</code></td><td><code>color: #14202b;</code></td><td>Couleur du texte</td></tr>
+      <tr><td><code>background-color</code></td><td><code>background-color: white;</code></td><td>Arrière-plan</td></tr>
+      <tr><td><code>font-family</code></td><td><code>font-family: Georgia, serif;</code></td><td>Police, avec solutions de repli</td></tr>
+      <tr><td><code>font-size</code></td><td><code>font-size: 1.2rem;</code></td><td>Taille du texte</td></tr>
+      <tr><td><code>text-align</code></td><td><code>text-align: center;</code></td><td>Aligne le texte dans sa boîte</td></tr>
+      <tr><td><code>padding</code> <code>margin</code></td><td><code>padding: 16px 24px;</code></td><td>Espace intérieur et extérieur (vertical, puis horizontal)</td></tr>
+      <tr><td><code>border</code></td><td><code>border: 2px solid red;</code></td><td>Épaisseur, style, couleur</td></tr>
+      <tr><td><code>border-radius</code></td><td><code>border-radius: 12px;</code></td><td>Coins arrondis</td></tr>
+      <tr><td><code>max-width</code></td><td><code>max-width: 700px;</code></td><td>Empêche une boîte de devenir trop large</td></tr>
+      <tr><td><code>display</code> <code>gap</code></td><td><code>display: flex; gap: 12px;</code></td><td>Disposition en ligne avec espacement</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>La meilleure référence pour tout le reste est MDN Web Docs, sur developer.mozilla.org (la plupart des pages existent en français). Cherchez « mdn » suivi du nom de ce que vous voulez.</p>
+
+  <h3>Avant de rendre votre travail</h3>
+  <div class="final" data-persist="final">
+    <label><input type="checkbox"> Page À propos</label>
+    <label><input type="checkbox"> Toutes les pages partagent un seul <code>style.css</code> et le rendu est cohérent</label>
+    <label><input type="checkbox"> Un menu relie toutes les pages, et chaque lien fonctionne</label>
+    <label><input type="checkbox"> Ajouter une page projet à partir du modèle (les projets eux-mêmes sont facultatifs)</label>
+    <label><input type="checkbox"> Le site est en ligne sur GitHub Pages</label>
+    <label><input type="checkbox"> Recommandé : chaque image a un <code>alt</code> et chaque page a son propre <code>title</code></label>
+    <label><input type="checkbox"> Recommandé : rien de privé dans les pages ni dans le CV</label>
+    <label><input type="checkbox"> Recommandé : le rendu est correct en largeur de téléphone</label>
+  </div>
+  <p class="foot">Conçu pour le projet web de la formation jeu vidéo. Tout ce que vous avez écrit aujourd'hui est du HTML et du CSS simples : ça continuera de fonctionner dans n'importe quel navigateur, sur n'importe quel hébergeur, aussi longtemps que vous gardez les fichiers.</p>
+</section>
+<footer class="site-foot">© 2026 3Mcrystal</footer>
+</main>
+</div>
+<!-- If you want to use JavaScript
+put it in a .js or I'm gonna cry -->
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- helpers ---------- */
+  var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+  var store = {
+    get: function (k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var done = store.get("pq-done") || {};
+  var tracks = [];
+
+  function copyText(text, btn) {
+    var label = btn.dataset.label || btn.textContent;
+    btn.dataset.label = label;
+    var flash = function (msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = label; }, 1400); };
+    var fallback = function () {
+      var t = document.createElement("textarea");
+      t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      t.remove();
+      flash(ok ? "Copié" : "Sélectionnez le texte et copiez-le");
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { flash("Copié"); }, fallback);
+    } else { fallback(); }
+  }
+
+  /* ---------- syntax highlighting ---------- */
+  function hlHtml(src) {
+    var out = "", last = 0, m;
+    var re = /<!--[\s\S]*?-->|<![D]OCTYPE[^>]*>|<\/?[a-zA-Z][^>]*>/gi;
+    while ((m = re.exec(src))) {
+      out += esc(src.slice(last, m.index));
+      var t = m[0];
+      if (t.indexOf("<!--") === 0) {
+        out += '<span class="c">' + esc(t) + "</span>";
+      } else if (/^<![D]OCTYPE/i.test(t)) {
+        out += '<span class="t">' + esc(t) + "</span>";
+      } else {
+        var p = /^(<\/?)([a-zA-Z0-9-]+)([\s\S]*?)(\/?>)$/.exec(t);
+        var attrs = esc(p[3]).replace(/([a-zA-Z:_-][\w:.-]*)(?:(=)("[^"]*"|'[^']*'))?/g, function (x, n, eq, v) {
+          return '<span class="a">' + n + "</span>" + (eq ? eq + '<span class="s">' + v + "</span>" : "");
+        });
+        out += '<span class="t">' + esc(p[1]) + p[2] + "</span>" + attrs + '<span class="t">' + p[4].replace(">", "&gt;") + "</span>";
+      }
+      last = re.lastIndex;
+    }
+    return out + esc(src.slice(last));
+  }
+  function hlCss(src) {
+    var out = "", buf = "", stack = [], i = 0;
+    function wrap(s, cls) {
+      var m = /^(\s*)([\s\S]*?)(\s*)$/.exec(s);
+      return esc(m[1]) + (m[2] ? '<span class="' + cls + '">' + esc(m[2]) + "</span>" : "") + esc(m[3]);
+    }
+    function decl(s) {
+      var k = s.indexOf(":");
+      if (k < 0) return esc(s);
+      var val = esc(s.slice(k + 1)).replace(/(#[0-9a-fA-F]{3,8}\b|-?\b\d*\.?\d+(?:px|rem|em|%|vh|vw|s|ms|fr)?)/g, '<span class="n">$1</span>');
+      return wrap(s.slice(0, k), "p") + ":" + val;
+    }
+    while (i < src.length) {
+      var c = src[i];
+      if (src.substr(i, 2) === "/*") {
+        var e = src.indexOf("*/", i + 2);
+        var j = e < 0 ? src.length : e + 2;
+        out += esc(buf) + '<span class="c">' + esc(src.slice(i, j)) + "</span>";
+        buf = ""; i = j; continue;
+      }
+      if (c === "{") {
+        out += wrap(buf, "k") + "{";
+        stack.push(buf.trim().charAt(0) === "@" ? "at" : "rule"); buf = "";
+      } else if (c === "}") {
+        out += (stack[stack.length - 1] === "rule" && buf.trim() ? decl(buf) : esc(buf)) + "}";
+        stack.pop(); buf = "";
+      } else if (c === ";") {
+        out += (stack[stack.length - 1] === "rule" ? decl(buf) : esc(buf)) + ";"; buf = "";
+      } else { buf += c; }
+      i++;
+    }
+    return out + esc(buf);
+  }
+  function highlight(src, lang) { return lang === "html" ? hlHtml(src) : lang === "css" ? hlCss(src) : esc(src); }
+  function setCode(el, text, lang) { el.innerHTML = highlight(text, lang); }
+  document.querySelectorAll("pre.code[data-lang]").forEach(function (pre) { setCode(pre, pre.textContent, pre.dataset.lang); });
+
+  /* prgoress */
+  var railLinks = {};
+  function updateProgress() {
+    var total = 0, n = 0, perSec = {};
+    tracks.forEach(function (t) {
+      var d = !!done[t.key];
+      if (document.getElementById(t.sec).dataset.part === "class") { total++; if (d) n++; }
+      var s = perSec[t.sec] || (perSec[t.sec] = { all: 0, ok: 0 });
+      s.all++; if (d) s.ok++;
+    });
+    document.getElementById("meter-fill").style.width = (total ? (n / total) * 100 : 0) + "%";
+    document.getElementById("meter-label").textContent = n + " / " + total + " défis du cours";
+    document.querySelector(".meter").setAttribute("aria-valuenow", String(total ? Math.round((n / total) * 100) : 0));
+    Object.keys(railLinks).forEach(function (id) {
+      var s = perSec[id];
+      railLinks[id].classList.toggle("done", !!(s && s.ok === s.all));
+    });
+  }
+  function markDone(key) { if (!done[key]) { done[key] = true; store.set("pq-done", done); } }
+
+  /*rail / theme*/
+  var sections = Array.prototype.slice.call(document.querySelectorAll("section.level"));
+  var list = document.getElementById("rail-list");
+  var GROUPS = { "class": "En classe - 1 h", "self": "En autonomie" };
+  var lastPart = "";
+  sections.forEach(function (s) {
+    if (s.dataset.part !== lastPart) {
+      lastPart = s.dataset.part;
+      var g = document.createElement("li");
+      g.className = "rail-group";
+      g.textContent = GROUPS[lastPart] || "";
+      list.appendChild(g);
+    }
+    var li = document.createElement("li"), a = document.createElement("a");
+    a.href = "#" + s.id;
+    a.innerHTML = '<span class="lv-tag">L' + s.id.slice(1) + "</span><span>" + esc(s.dataset.title) + "</span>";
+    li.appendChild(a); list.appendChild(li); railLinks[s.id] = a;
+  });
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          Object.keys(railLinks).forEach(function (id) { railLinks[id].removeAttribute("aria-current"); });
+          railLinks[en.target.id].setAttribute("aria-current", "true");
+        }
+      });
+    }, { rootMargin: "-15% 0px -75% 0px" });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+  var themeBtn = document.getElementById("theme-btn");
+  var savedTheme = store.get("pq-theme");
+  if (savedTheme === "dark" || savedTheme === "light") document.documentElement.setAttribute("data-theme", savedTheme);
+  themeBtn.addEventListener("click", function () {
+    var cur = document.documentElement.getAttribute("data-theme") ||
+      (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    var next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    store.set("pq-theme", next);
+  });
+
+  /* ---------- live editors ---------- */
+  var BASE_CSS = ':host{all:initial;display:flex;flex-direction:column;font:16px/normal "Times New Roman",Times,serif;color:#111;background:#fff}' +
+    ".canvas{flex:1;min-height:240px}.pgbody{margin:8px}";
+  function mapSelectors(css) {
+    return css.replace(/(^|[\s,}>+~(])(body)(?=[\s,{.:#\[>+~)]|$)/g, "$1.pgbody")
+              .replace(/(^|[\s,}>+~(])(html|:root)(?=[\s,{.:#\[>+~)]|$)/g, "$1.canvas");
+  }
+  function sanitize(root) {
+    root.querySelectorAll("script,iframe,object,embed,link,meta,base").forEach(function (n) { n.remove(); });
+    root.querySelectorAll("*").forEach(function (el) {
+      Array.prototype.slice.call(el.attributes).forEach(function (a) {
+        var n = a.name.toLowerCase();
+        if (n.indexOf("on") === 0 || ((n === "href" || n === "src") && /^\s*javascript:/i.test(a.value))) el.removeAttribute(a.name);
+      });
+    });
+  }
+
+  function initPg(pg, idx) {
+    var sec = pg.closest("section").id;
+    var get = function (n) {
+      var s = pg.querySelector('script[data-src="' + n + '"]');
+      return s ? s.textContent.replace(/^\n/, "") : null;
+    };
+    var orig = { html: get("html") || "", css: get("css") || "" };
+    var src = { html: orig.html, css: orig.css };
+    var solution = get("solution");
+    var file = pg.dataset.file || "index.html";
+    var htmlLabel = /\.html$/.test(file) ? file : "index.html";
+    var checks = JSON.parse(pg.dataset.checks || "[]");
+    var tab = pg.dataset.tab === "css" ? "css" : "html";
+    pg.querySelectorAll("script").forEach(function (s) { s.remove(); });
+
+    pg.innerHTML =
+      '<div class="pg-top"><div class="pg-title"><small>Éditeur en direct</small>' + esc(pg.dataset.title) + (pg.dataset.home ? ' <span class="home-tag">Chez vous</span>' : "") + "</div>" +
+      '<div class="pg-actions"><button class="btn" type="button" data-act="reset">Réinitialiser</button><button class="btn" type="button" data-act="copy">Copier le code</button></div></div>' +
+      '<div class="pg-goal"><b>À vous.</b> ' + esc(pg.dataset.goal || "") + "</div>" +
+      '<div class="pg-body"><div class="pg-edit"><div class="tabs" role="tablist">' +
+      '<button class="tab" type="button" role="tab" data-tab="html">' + esc(htmlLabel) + "</button>" +
+      '<button class="tab" type="button" role="tab" data-tab="css">style.css</button></div>' +
+      '<textarea class="ed" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea></div>' +
+      '<div class="pg-view"><div class="chrome"><i></i><i></i><i></i><span>' + esc(htmlLabel) + '</span></div><div class="pv"><div class="pv-host"></div></div></div></div>' +
+      '<div class="checks"></div>';
+
+    var ta = pg.querySelector(".ed"), tabs = pg.querySelectorAll(".tab"), checksEl = pg.querySelector(".checks");
+    var root = pg.querySelector(".pv-host").attachShadow({ mode: "open" });
+    root.innerHTML = "<style>" + BASE_CSS + "</style><style></style><div class='canvas'><div class='pgbody'></div></div>";
+    var userStyle = root.querySelectorAll("style")[1], canvas = root.querySelector(".canvas"), body = root.querySelector(".pgbody");
+    root.addEventListener("click", function (e) { if (e.target.closest && e.target.closest("a")) e.preventDefault(); });
+
+    var checkEls = checks.map(function (c, i) {
+      var key = "pg" + idx + "-c" + i;
+      if (!c.bonus) tracks.push({ key: key, sec: sec });
+      var l = document.createElement("label");
+      l.innerHTML = '<span class="box" aria-hidden="true"></span><span>' + esc(c.l) + "</span>";
+      checksEl.appendChild(l);
+      return { el: l, key: key, def: c };
+    });
+
+    function evaluate() {
+      var clean = src.css.replace(/\/\*[\s\S]*?\*\//g, "");
+      checkEls.forEach(function (c) {
+        var ok = false, d = c.def;
+        try {
+          if (d.sel) ok = body.querySelectorAll(d.sel).length >= (d.min || 1);
+          else if (d.css) ok = new RegExp(d.css).test(clean);
+          else if (d.html) ok = new RegExp(d.html).test(src.html);
+        } catch (e) { ok = false; }
+        if (ok) markDone(c.key);
+        var shown = !!done[c.key];
+        c.el.classList.toggle("ok", shown);
+        c.el.querySelector(".box").textContent = shown ? "✓" : "";
+      });
+      updateProgress();
+    }
+    function render() {
+      userStyle.textContent = mapSelectors(src.css);
+      body.innerHTML = src.html;
+      sanitize(body);
+      var cs = getComputedStyle(body), clear = "rgba(0, 0, 0, 0)";
+      canvas.style.backgroundColor = cs.backgroundColor !== clear && cs.backgroundColor !== "transparent" ? cs.backgroundColor : "";
+      canvas.style.backgroundImage = cs.backgroundImage !== "none" ? cs.backgroundImage : "";
+      evaluate();
+    }
+    function setTab(t) {
+      tab = t;
+      tabs.forEach(function (b) { b.setAttribute("aria-selected", String(b.dataset.tab === t)); });
+      ta.value = src[t];
+      ta.setAttribute("aria-label", (t === "css" ? "style.css" : htmlLabel) + " : éditeur de code");
+    }
+    tabs.forEach(function (b) { b.addEventListener("click", function () { setTab(b.dataset.tab); }); });
+
+    var timer = null;
+    ta.addEventListener("input", function () {
+      src[tab] = ta.value;
+      clearTimeout(timer); timer = setTimeout(render, 120);
+    });
+    var trap = true;
+    ta.addEventListener("blur", function () { trap = true; });
+    ta.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { trap = false; return; }
+      if (e.key === "Tab" && trap && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        e.preventDefault();
+        ta.setRangeText("  ", ta.selectionStart, ta.selectionEnd, "end");
+        ta.dispatchEvent(new Event("input"));
+        return;
+      }
+      if (e.key !== "Tab") trap = true;
+    });
+    pg.querySelector('[data-act="reset"]').addEventListener("click", function () {
+      src.html = orig.html; src.css = orig.css; ta.value = src[tab]; render();
+    });
+    pg.querySelector('[data-act="copy"]').addEventListener("click", function (e) { copyText(src[tab], e.currentTarget); });
+
+    if (solution !== null) {
+      var d = document.createElement("details");
+      d.innerHTML = '<summary>Bloqué ? Voir une solution possible</summary><pre class="code"></pre>';
+      setCode(d.querySelector("pre"), solution, /^\s*</.test(solution) ? "html" : "css");
+      pg.appendChild(d);
+    }
+    setTab(tab);
+    render();
+  }
+  document.querySelectorAll(".pg").forEach(initPg);
+
+  /* ---------- annotated skeleton ---------- */
+  var ANNO = {
+    skeleton: [
+      ["<!" + "DOCTYPE html>", "La déclaration", "Indique au navigateur que c'est une page HTML moderne. Ce doit être la toute première ligne. Sans elle, le navigateur retombe dans un ancien mode de compatibilité et les mises en page se comportent bizarrement."],
+      ['<html lang="fr">', "L'élément racine", "Tout le reste vit à l'intérieur. L'attribut lang donne la langue de la page (fr, en...). Les lecteurs d'écran s'en servent pour choisir une voix, et les navigateurs pour proposer la traduction."],
+      ["<head>", "Informations sur la page", "Le head contient des réglages et des liens. Rien de ce qu'il contient n'apparaît sur la page elle-même, sauf le titre qui s'affiche dans l'onglet du navigateur."],
+      ['  <meta charset="UTF-8">', "L'encodage des caractères", "UTF-8 permet d'afficher correctement accents et symboles : é, ñ, ©, flèches. Oubliez cette ligne et vous verrez des caractères étranges comme Ã© dans votre texte."],
+      ['  <meta name="viewport" content="width=device-width, initial-scale=1.0">', "Le réglage téléphone", "Sans elle, les téléphones font semblant d'être un grand écran de bureau et rétrécissent toute votre page. Avec elle, la page utilise la vraie largeur de l'écran. Indispensable pour toute mise en page adaptée au mobile."],
+      ["  <title>À propos | Yaël Girard</title>", "Le titre d'onglet", "Le texte dans l'onglet du navigateur, dans les favoris et dans les résultats de recherche. Donnez à chaque page le sien : le nom de la page d'abord, puis votre nom."],
+      ['  <link rel="stylesheet" href="style.css">', "Relier le CSS", "Charge votre feuille de style. Mettez cette même ligne dans chaque page et elles partagent toutes le même look. Le chemin est relatif au fichier courant."],
+      ["</head>", "Fermer le head", "Chaque balise ouvrante a une balise fermante avec une barre oblique. Fermez dans l'ordre inverse de l'ouverture."],
+      ["<body>", "Ce que les gens voient", "Tout ce que vous voulez afficher se place entre les balises body ouvrante et fermante : texte, images, liens, menus."],
+      ["  <h1>Yaël Girard</h1>", "Votre contenu", "C'est ici que se déroulent les niveaux 2 à 5. Un seul h1 par page, comme titre principal."],
+      ["</body>", "Fermer le body", "Fin de la partie visible."],
+      ["</html>", "Fermer la racine", "La dernière ligne du fichier. Fermez d'abord le body, puis html."]
+    ]
+  };
+  document.querySelectorAll("[data-anno]").forEach(function (box) {
+    var lines = ANNO[box.dataset.anno];
+    box.innerHTML = '<div class="lab-title">Cliquez sur une ligne</div><div class="split"><div class="anno-lines"></div>' +
+      '<div class="anno-note" aria-live="polite"><b></b><p></p></div></div>';
+    var wrap = box.querySelector(".anno-lines"), note = box.querySelector(".anno-note");
+    var btns = lines.map(function (ln, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "anno-line"; b.setAttribute("aria-pressed", "false");
+      b.innerHTML = highlight(ln[0], "html").replace(/^(\s*)/, function (m) { return esc(m); });
+      b.style.whiteSpace = "pre";
+      b.addEventListener("click", function () { pick(i); });
+      wrap.appendChild(b);
+      return b;
+    });
+    function pick(i) {
+      btns.forEach(function (b, j) { b.setAttribute("aria-pressed", String(i === j)); });
+      note.querySelector("b").textContent = lines[i][1];
+      note.querySelector("p").textContent = lines[i][2];
+    }
+    pick(0);
+  });
+
+  /* ---------- path quiz ---------- */
+  var QUIZ = {
+    paths: [
+      { tree: "mon-portfolio/\n├── {{index.html}}\n├── style.css\n└── images/\n    └── portrait.jpg",
+        ask: "Vous écrivez dans index.html. Quel src charge portrait.jpg ?",
+        opts: [
+          ["images/portrait.jpg", true, "Partez du dossier de la page dans laquelle vous écrivez, puis entrez dans images."],
+          ["portrait.jpg", false, "Cela cherche le fichier à côté d'index.html. Il est dans le dossier images."],
+          ["/images/portrait.jpg", false, "Une barre oblique au début part de la racine de tout le serveur web. Sur une adresse comme user.github.io/mon-site/, ce n'est pas le bon endroit."],
+          ["C:\\Users\\yael\\mon-portfolio\\images\\portrait.jpg", false, "Ce chemin n'existe que sur votre ordinateur. Les visiteurs ne peuvent pas l'atteindre."]
+        ] },
+      { tree: "mon-portfolio/\n├── index.html\n├── {{projet-lighthouse-keeper-s-secret.html}}\n└── style.css",
+        ask: "Vous êtes dans lighthouse-keeper-s-secret.html. Quel href vous ramène à la page À propos ?",
+        opts: [
+          ["index.html", true, "Les deux fichiers sont dans le même dossier, le nom du fichier suffit."],
+          ["../index.html", false, "../ veut dire « remontez d'un dossier ». Il n'y a rien au-dessus dont vous ayez besoin ici."],
+          ["mon-portfolio/index.html", false, "Vous êtes déjà dans mon-portfolio. Ne répétez pas le nom du dossier."],
+          ["Index.html", false, "Une majuscule. Ça marche sur votre PC, puis ça casse en ligne où les noms respectent la casse."]
+        ] },
+      { tree: "mon-portfolio/\n├── {{index.html}}\n└── images/\n    └── screens/\n        └── level1.png",
+        ask: "Quel chemin va d'index.html à level1.png ?",
+        opts: [
+          ["images/screens/level1.png", true, "Dans images, dans screens, puis le fichier."],
+          ["screens/level1.png", false, "screens est dans images, pas à côté d'index.html."],
+          ["images/level1.png", false, "Cela saute le dossier screens."],
+          ["images\\screens\\level1.png", false, "Les chemins web utilisent toujours des barres obliques, même sous Windows."]
+        ] },
+      { tree: "mon-portfolio/\n├── style.css\n└── projets/\n    └── {{lighthouse.html}}",
+        ask: "Question boss. lighthouse.html est dans un sous-dossier. Quel href charge style.css depuis là ?",
+        opts: [
+          ["../style.css", true, "Remontez d'un dossier, hors de projets, puis prenez style.css."],
+          ["style.css", false, "Cela cherche la feuille de style dans projets."],
+          ["projets/style.css", false, "Il n'y a pas de style.css dans projets."],
+          ["./style.css", false, "./ veut dire le dossier courant, c'est-à-dire projets."]
+        ] }
+    ]
+  };
+  function shuffle(a) {
+    var b = a.slice();
+    for (var i = b.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t; }
+    return b;
+  }
+  document.querySelectorAll("[data-quiz]").forEach(function (el) {
+    var name = el.dataset.quiz, Q = QUIZ[name], sec = el.closest("section").id;
+    var keyOf = function (i) { return "quiz-" + name + "-" + i; };
+    Q.forEach(function (q, i) { tracks.push({ key: keyOf(i), sec: sec }); });
+    var qi = 0;
+    for (var k = 0; k < Q.length; k++) { if (!done[keyOf(k)]) { qi = k; break; } }
+    function show() {
+      var q = Q[qi];
+      var tree = esc(q.tree).replace(/\{\{([^}]+)\}\}/g, '<span class="here">$1</span>');
+      el.innerHTML = '<div class="lab-title">Question ' + (qi + 1) + " sur " + Q.length + '</div>' +
+        '<div class="tree">' + tree + "</div><p>" + esc(q.ask) + '</p><div class="opts"></div>' +
+        '<div class="feedback" aria-live="polite"></div><div class="nextwrap"></div>';
+      var opts = el.querySelector(".opts"), fb = el.querySelector(".feedback"), nw = el.querySelector(".nextwrap");
+      shuffle(q.opts).forEach(function (o) {
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "opt"; b.textContent = o[0];
+        b.addEventListener("click", function () {
+          if (o[1]) {
+            b.classList.add("right");
+            fb.textContent = "Correct. " + o[2];
+            opts.querySelectorAll(".opt").forEach(function (x) { x.disabled = true; });
+            markDone(keyOf(qi)); updateProgress();
+            var n = document.createElement("button");
+            n.type = "button"; n.className = "btn primary";
+            n.textContent = qi < Q.length - 1 ? "Question suivante" : "Recommencer";
+            n.addEventListener("click", function () { qi = (qi + 1) % Q.length; show(); });
+            nw.appendChild(n);
+          } else {
+            b.classList.add("wrong");
+            fb.textContent = "Pas tout à fait. " + o[2];
+          }
+        });
+        opts.appendChild(b);
+      });
+    }
+    show();
+  });
+
+  /* ---------- box model lab ---------- */
+  (function () {
+    var m = document.getElementById("bm-m"), b = document.getElementById("bm-b"), p = document.getElementById("bm-p");
+    if (!m) return;
+    function upd() {
+      document.getElementById("bm-margin").style.padding = m.value + "px";
+      document.getElementById("bm-border").style.padding = b.value + "px";
+      document.getElementById("bm-padding").style.padding = p.value + "px";
+      document.getElementById("bm-m-o").textContent = m.value + "px";
+      document.getElementById("bm-b-o").textContent = b.value + "px";
+      document.getElementById("bm-p-o").textContent = p.value + "px";
+      setCode(document.getElementById("bm-css"), ".box {\n  margin: " + m.value + "px;\n  border: " + b.value + "px solid;\n  padding: " + p.value + "px;\n}", "css");
+    }
+    [m, b, p].forEach(function (x) { x.addEventListener("input", upd); });
+    upd();
+  })();
+
+  /* ---------- flexbox lab ---------- */
+  (function () {
+    var box = document.getElementById("fx-box");
+    if (!box) return;
+    box.innerHTML = "";
+    for (var n = 1; n <= 5; n++) { var i = document.createElement("i"); i.textContent = String(n); box.appendChild(i); }
+    var ids = ["dir", "just", "align", "gap", "wrap"], props = ["flex-direction", "justify-content", "align-items", "gap", "flex-wrap"];
+    function upd() {
+      var lines = [".row {", "  display: flex;"];
+      ids.forEach(function (id, k) {
+        var v = document.getElementById("fx-" + id).value;
+        lines.push("  " + props[k] + ": " + v + ";");
+      });
+      lines.push("}");
+      box.style.flexDirection = document.getElementById("fx-dir").value;
+      box.style.justifyContent = document.getElementById("fx-just").value;
+      box.style.alignItems = document.getElementById("fx-align").value;
+      box.style.gap = document.getElementById("fx-gap").value;
+      box.style.flexWrap = document.getElementById("fx-wrap").value;
+      setCode(document.getElementById("fx-css"), lines.join("\n"), "css");
+    }
+    ids.forEach(function (id) { document.getElementById("fx-" + id).addEventListener("change", upd); });
+    upd();
+  })();
+
+  /* ---------- theme lab ---------- */
+  (function () {
+    var bg = document.getElementById("th-bg");
+    if (!bg) return;
+    var tx = document.getElementById("th-text"), ac = document.getElementById("th-accent"),
+        fn = document.getElementById("th-font"), rd = document.getElementById("th-radius");
+    var site = document.getElementById("th-site"), fb = document.getElementById("th-fb");
+    function lum(hex) {
+      var c = [1, 3, 5].map(function (i) { return parseInt(hex.slice(i, i + 2), 16) / 255; })
+        .map(function (v) { return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+      return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+    }
+    function ratio(a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+    function verdict(r) { return r >= 7 ? "excellent" : r >= 4.5 ? "bon" : "trop faible, difficile à lire"; }
+    var css = "";
+    function upd() {
+      site.style.background = bg.value; site.style.color = tx.value;
+      document.getElementById("th-h").style.fontFamily = fn.value;
+      document.getElementById("th-h").style.color = ac.value;
+      document.getElementById("th-name").style.fontFamily = fn.value;
+      document.getElementById("th-links").style.color = ac.value;
+      var card = document.getElementById("th-card");
+      card.style.borderColor = ac.value; card.style.borderRadius = rd.value;
+      css = ":root {\n  --bg: " + bg.value + ";\n  --text: " + tx.value + ";\n  --accent: " + ac.value +
+        ";\n  --font-title: " + fn.value + ";\n  --radius: " + rd.value + ";\n}";
+      setCode(document.getElementById("th-css"), css, "css");
+      var r1 = ratio(bg.value, tx.value), r2 = ratio(bg.value, ac.value);
+      fb.textContent = "Texte sur fond " + r1.toFixed(1) + ":1 (" + verdict(r1) + "). Accent sur fond " + r2.toFixed(1) + ":1 (" + verdict(r2) + ").";
+    }
+    [bg, tx, ac].forEach(function (x) { x.addEventListener("input", upd); });
+    [fn, rd].forEach(function (x) { x.addEventListener("change", upd); });
+    document.getElementById("th-copy").addEventListener("click", function (e) { copyText(css, e.currentTarget); });
+    upd();
+  })();
+
+  /* ---------- final checklist ---------- */
+  (function () {
+    var box = document.querySelector("[data-persist='final']");
+    if (!box) return;
+    var boxes = box.querySelectorAll("input"), saved = store.get("pq-final") || [];
+    boxes.forEach(function (c, i) {
+      c.checked = !!saved[i];
+      c.addEventListener("change", function () {
+        store.set("pq-final", Array.prototype.map.call(boxes, function (x) { return x.checked; }));
+      });
+    });
+  })();
+
+  updateProgress();
+})();
+</script>
+
+</body></html>
