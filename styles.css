@@ -1,0 +1,178 @@
+:root {
+  --background: #111318;
+  --text: #e8eaf0;
+  --text-muted: #969dab;
+  --accent: #91a9c7;
+  --accent-hover: #c3d6ee;
+  --border: #292e38;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+header {
+  max-width: 1000px;
+  margin: auto;
+  padding: 110px 30px 70px;
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  font-size: clamp(2.5rem, 6vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 70px 30px;
+}
+
+section {
+  margin-bottom: 96px;
+  scroll-margin-top: 30px;
+}
+
+section:last-child {
+  margin-bottom: 0;
+}
+
+section h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+
+#about p {
+  max-width: 600px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+}
+
+
+#projects > ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+#projects > ul > li {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 28px;
+}
+
+#projects h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+#projects p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+/* Features list */
+
+#projects li ul {
+  margin: 10px 0 20px 20px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+#projects li ul li {
+  margin-bottom: 4px;
+}
+
+/* Links */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+#projects > ul > li > a {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+
+#contact p {
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+@media (max-width: 650px) {
+  header {
+    padding: 70px 22px 45px;
+  }
+
+  main {
+    padding: 45px 22px;
+  }
+
+  section {
+    margin-bottom: 60px;
+  }
+
+  #projects > ul {
+    grid-template-columns: 1fr;
+  }
+
+  #projects > ul > li {
+    padding: 22px;
+  }
+}
